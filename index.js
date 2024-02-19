@@ -30,7 +30,7 @@ function authenticate(req, res, next) {
 
 app.use(authenticate);
 
-app.get('/users', async (req, res) => {
+app.post('/robux/all', async (req, res) => {
   try {
     const users = await UserLog.findAll();
     res.json(users);
