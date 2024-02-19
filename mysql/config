@@ -1,0 +1,29 @@
+const Sequelize = require("sequelize");
+require('dotenv').config()
+
+var database_name=process.env.MYSQL_DATABASE
+var username=process.env.MYSQL_USERNAME
+var password=process.env.MYSQL_PASSWORD
+var host=process.env.MYSQL_HOST
+
+const sequelize_db = new Sequelize(database_name, username, password, {
+  host: host,
+  dialect: 'mysql',
+  logging:false,
+  define: {
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_unicode_ci',
+},
+});
+
+async function connectToDatabase() {
+    try {
+      await sequelize_db.sync();
+      Sequelize.options.logging = false;
+    } catch (error) {
+    logger.error(error);
+    }
+  }
+
+  connectToDatabase();
+  module.exports = sequelize_db;
