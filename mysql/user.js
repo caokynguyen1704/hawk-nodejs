@@ -8,7 +8,7 @@ const UserLog = sequelize.define('UserLog', {
     autoIncrement: true
   },
   userid: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
   placeId: {
