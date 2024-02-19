@@ -39,7 +39,7 @@ app.get('/users', async (req, res) => {
     res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu người dùng.' });
   }
 });
-app.post('/payDiamond', async (req, res) => {
+app.post('/robux', async (req, res) => {
   try {
     await savePostData(req.body)
     res.json({ok:1});
