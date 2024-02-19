@@ -10,7 +10,8 @@ async function savePostData(postData) {
       avatar: postData.avatar,
       content: postData.content,
       isServer: postData.isServer,
-      data: postData.data // Lưu trực tiếp đối tượng JSON vào trường dữ liệu
+      data: postData.data, // Lưu trực tiếp đối tượng JSON vào trường dữ liệu
+      code: postData.code
     });
     return true
   } catch (error) {
