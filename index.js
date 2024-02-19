@@ -11,7 +11,7 @@ const port = 5000;
 app.use(bodyParser.json());
 function authenticate(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
   const token = req.headers['x-auth-token'];
   const jwtToken = req.headers['jwt'];
   if (req.path.startsWith('/guest/')) {
