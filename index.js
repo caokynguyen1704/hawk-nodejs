@@ -105,7 +105,7 @@ app.post('/gift',async(req,res)=>{
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://apis.roblox.com/messaging-service/v1/universes/4719251467/topics/reset',
+        url: 'https://apis.roblox.com/messaging-service/v1/universes/4719251467/topics/gift',
         headers: { 
           'x-api-key': 'UqU2Wl7YT0aEglszUzj7NUjo5IdAuqtnAarkAODwXh/Jjacw', 
           'Content-Type': 'application/json'
