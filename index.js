@@ -33,6 +33,8 @@ function authenticate(req, res, next) {
 app.use(authenticate);
 
 app.post('/robux/all', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
   try {
     const users = await UserLog.findAll();
     res.json(users);
@@ -42,6 +44,8 @@ app.post('/robux/all', async (req, res) => {
   }
 });
 app.post('/robux', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
   try {
     await savePostData(req.body)
     res.json({ok:1});
