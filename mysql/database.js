@@ -1,6 +1,7 @@
 const Admin = require('./admin');
 const sequelize = require('./config');
 const UserLog = require('./user');
+const UserData=require('./userstore')
 
 async function syncData(table,name) {
     try {
@@ -15,10 +16,11 @@ async function syncData(table,name) {
 async function init(){
     await syncData(UserLog,"UserLog")
    await syncData(Admin,"Admin")
-    
+   await syncData(UserData,"UserData")
 }
 init()
 module.exports={
     UserLog,
-    Admin
+    Admin,
+    UserData
 }
