@@ -119,10 +119,11 @@ app.post('/gift',async(req,res)=>{
       
       axios.request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        res.json({ error: 'OK' });
+        
       })
       .catch((error) => {
-        console.log(error);
+        res.json({ error: 'ERROR' });
       });
       
     }
