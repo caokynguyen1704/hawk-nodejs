@@ -88,6 +88,45 @@ app.post('/reset',async(req,res)=>{
   //   res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu người dùng.' });
   // }
 })
+app.post('/debug',async(req,res)=>{
+  try{
+    const {userid,turn_on } = req.body;
+    if (!userid) {
+      return res.status(400).json({ error: 'Missing' });
+    }else{
+      let package={
+        turn_on:turn_on,
+        userid:userid
+      }
+      let data = JSON.stringify({
+        "message": JSON.stringify(package)
+      });
+      
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://apis.roblox.com/messaging-service/v1/universes/4719251467/topics/debugmode',
+        headers: { 
+          'x-api-key': 'UqU2Wl7YT0aEglszUzj7NUjo5IdAuqtnAarkAODwXh/Jjacw', 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        res.json({ error: 'OK' });
+        
+      })
+      .catch((error) => {
+        res.json({ error: 'ERROR' });
+      });
+      
+    }
+  }catch (error) {
+    res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu người dùng.' });
+  }
+})
 app.post('/gift',async(req,res)=>{
   try{
     const { amount,expire,id,message,type,userid } = req.body;
