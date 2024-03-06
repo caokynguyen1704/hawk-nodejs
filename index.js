@@ -6,7 +6,7 @@ const { checkJwt, checkToken, getJwt } = require('./lib/auth');
 const { getAdminByEmailPassword, createAdmin } = require('./controller/admin');
 const { savePostData } = require('./controller/user');
 const axios = require('axios');
-
+const IDRoblox="5669342545"
 const app = express();
 const port = 5000;
 
@@ -31,18 +31,38 @@ function authenticate(req, res, next) {
 
 
 app.use(authenticate);
-
 app.post('/robux/all', async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
+  
   try {
-    const users = await UserLog.findAll();
+    const page = req.body.page || 1; // Lấy số trang từ request, mặc định là 1 nếu không có
+    const limit = 10;
+    const offset = (page - 1) * limit; // Tính toán offset dựa trên số trang
+
+    const users = await UserLog.findAll({
+      offset: offset,
+      limit: limit
+    });
+
     res.json(users);
   } catch (error) {
     console.error('Lỗi khi lấy dữ liệu người dùng:', error);
     res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu người dùng.' });
   }
 });
+
+// app.post('/robux/all', async (req, res) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
+//   try {
+//     const users = await UserLog.findAll();
+//     res.json(users);
+//   } catch (error) {
+//     console.error('Lỗi khi lấy dữ liệu người dùng:', error);
+//     res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu người dùng.' });
+//   }
+// });
 app.post('/robux', async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, jwt, X-Auth-Token");
@@ -105,7 +125,7 @@ app.post('/debug',async(req,res)=>{
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://apis.roblox.com/messaging-service/v1/universes/4719251467/topics/debugmode',
+        url: 'https://apis.roblox.com/messaging-service/v1/universes/'+IDRoblox+'/topics/debugmode',
         headers: { 
           'x-api-key': 'UqU2Wl7YT0aEglszUzj7NUjo5IdAuqtnAarkAODwXh/Jjacw', 
           'Content-Type': 'application/json'
@@ -148,7 +168,7 @@ app.post('/gift',async(req,res)=>{
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://apis.roblox.com/messaging-service/v1/universes/4719251467/topics/gift',
+        url: 'https://apis.roblox.com/messaging-service/v1/universes/'+IDRoblox+'/topics/gift',
         headers: { 
           'x-api-key': 'UqU2Wl7YT0aEglszUzj7NUjo5IdAuqtnAarkAODwXh/Jjacw', 
           'Content-Type': 'application/json'
